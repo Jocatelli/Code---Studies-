@@ -1,0 +1,111 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+ 
+// Função Geradora de CNPJ
+int* cnpj_generator() {
+ int *cnpj, pesos[14], vetSoma[14], soma, resto, digito, i;
+ 
+ // Aloca memória para o cnpj
+ cnpj = (int *) malloc(sizeof(int) * 14);
+ 
+ // Gera 12 números aleatórios
+ for(i = 0; i < 12; i++) {
+ cnpj[i] = rand() % 10;
+ }
+ 
+ // Cálculo do primeiro dígito verificador
+ 
+ // Gera os 12 pesos
+ for(i = 0; i < 4; i++) {
+ pesos[i] = 5 - i;
+ }
+ for(i = 4; i< 12; i++) {
+ pesos[i] = 13 - i;
+ }
+ 
+ // Multiplica os valores de cada coluna
+ for(i = 0; i < 12; i++) {
+ vetSoma[i] = cnpj[i] * pesos[i];
+ }
+ 
+ // Calcula o somatório dos resultados
+ soma = 0;
+ for(i = 0; i < 12; i++) {
+ soma += vetSoma[i];
+ }
+ 
+ // Realiza-se a divisão inteira do resultado por 11
+ resto = soma % 11;
+ 
+ // Verifica o resto da divisão
+ if(resto < 2) {
+ digito = 0;
+ } else {
+ digito = 11 - resto;
+ }
+ 
+ // Adiciona o 1º dígito verificador ao cpf
+ cnpj[12] = digito;
+ 
+ // Cálculo do segundo dígito verificador
+ 
+ // Gera os 13 pesos
+ for(i = 0; i < 5; i++) {
+ pesos[i] = 6 - i;
+ }
+ for(i = 5; i< 13; i++) {
+ pesos[i] = 14 - i;
+ }
+ 
+ // Multiplica os valores de cada coluna
+ for(i = 0; i < 13; i++) {
+ vetSoma[i] = cnpj[i] * pesos[i];
+ }
+ 
+ // Calcula o somatório dos resultados
+ soma = 0;
+ for(i = 0; i < 13; i++) {
+ soma += vetSoma[i];
+ }
+ 
+ // Realiza-se a divisão inteira do resultado por 11
+ resto = soma % 11;
+ 
+ // Verifica o resto da divisão
+ if(resto < 2) {
+ digito = 0;
+ } else {
+ digito = 11 - resto;
+ }
+ 
+ // Adiciona o 2º dígito verificador ao cpf
+ cnpj[13] = digito;
+ 
+ return cnpj;
+}
+
+// Função main
+// Main Function
+int main(int argc, char** argv)
+{
+ int *cnpj, i;
+ 
+ // Inicia o gerador de números aleatórios
+ srand(time(NULL));
+ 
+ // Gera um cpf aleatório
+ cnpj = cnpj_generator();
+ 
+ // Imprime o cnpj gerado na tela
+ for(i = 0; i < 14; i++) {
+ printf("%d", cnpj[i]);
+ }
+ printf(" - CNPJ");
+ 
+ system("pause");
+ 
+ // Libera a memória usada para o cnpj
+ free(cnpj);
+ return 0;
+}
