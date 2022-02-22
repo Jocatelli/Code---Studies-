@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
- 
+ //Gerador de CNPJ em C
 // Função Geradora de CNPJ
 int* cnpj_generator() {
  int *cnpj, pesos[14], vetSoma[14], soma, resto, digito, i;
