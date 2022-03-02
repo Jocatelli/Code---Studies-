@@ -1,0 +1,58 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<conio.h>
+int main()
+{
+int saque=0,saldo=0,deposito=0,operacao,sair;
+printf("Caixa Eletronico JOCA\n\n");
+printf("Qual Operacao Deseja Fazer\n\n");
+
+do{ //menu de opçoes
+printf("1 - Efetuar Saldo\n2 - Efetuar Deposito\n3 - Efetuar Saque\n4 - Sair\n");
+scanf("%d",&operacao);
+//system("PAUSE");
+switch(operacao){
+    case 1:
+    
+    saldo=-saque+deposito;
+printf("Operacao Desejada:Saldo\n");
+printf("Deposito...R$%d\n",deposito);
+printf("Saque......R$%d\n",saque);
+printf("Saldo atual: R$%d\n",saldo);
+
+    break;
+    
+    case 2:
+    printf("Digite o Valor de Deposito: R$");
+    scanf("%d",&deposito);
+    printf("Valor Depositado:R$ %d\n",deposito);
+saldo=(deposito)-(saque);
+printf("Seu saldo atual:R$ %d\n",saldo);
+    break;
+    
+    case 3:
+    printf("Digite o Valor Solicitado:R$");
+    scanf("%d",&saque);
+    if (saque>saldo)
+{
+printf("Valor Solicitado R$%d é menor que o saldo disponivel R$%d\n",saque,saldo);
+saque=(0);
+
+}
+else if (saque<=saldo)
+{
+saldo=(deposito)-saque;
+printf("Seu novo Saldo atual: R$%d",&saldo);
+}
+    break;
+    case 4:
+    printf("Finalizando . . . ");
+    break;
+    default:
+            printf("Opcao invalida!\n");
+}
+
+}while(operacao != 4);
+
+    return 0;
+}
